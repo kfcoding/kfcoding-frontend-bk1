@@ -14,15 +14,14 @@ const {SubMenu} = Menu;
 const menu = (
   <Menu>
     <Menu.Item key="0">
-      <a href="http://www.alipay.com/" style={{fontSize: '12px'}}><Icon type="edit" style={{marginRight: '10px'}}/> 重命名</a>
+      <a style={{fontSize: '12px'}}><Icon type="edit" style={{marginRight: '10px'}}/> 重命名</a>
     </Menu.Item>
     <Menu.Item key="1">
-      <a href="http://www.alipay.com/" style={{fontSize: '12px'}}><Icon type="link" style={{marginRight: '10px'}}/> 复制地址</a>
+      <a style={{fontSize: '12px'}}><Icon type="link" style={{marginRight: '10px'}}/> 复制地址</a>
     </Menu.Item>
     <Menu.Divider/>
-    <Menu.Item key="1">
-      <a href="http://www.taobao.com/" style={{color: '#e05353', fontSize: '12px'}}><Icon type="close"
-                                                                                          style={{marginRight: '10px'}}/>
+    <Menu.Item key="2">
+      <a style={{color: '#e05353', fontSize: '12px'}}><Icon type="close" style={{marginRight: '10px'}}/>
         删除</a>
     </Menu.Item>
   </Menu>
