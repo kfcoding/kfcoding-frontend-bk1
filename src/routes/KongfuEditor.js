@@ -7,9 +7,32 @@ import { current, currentUser } from "../services/users";
 import MyFooter from "../components/Footer";
 import request from "../utils/request";
 import { getOssToken } from "../services/kongfu";
+import CannerEditor from 'kf-slate-editor';
+import {Value} from 'slate';
 
 const {Header, Content, Footer, Sider} = Layout;
 const {SubMenu} = Menu;
+
+const initialValue = Value.fromJSON({
+  document: {
+    nodes: [
+      {
+        object: 'block',
+        type: 'paragraph',
+        nodes: [
+          {
+            object: 'text',
+            leaves: [
+              {
+                text: 'A line of text in a paragraph.',
+              }
+            ],
+          },
+        ],
+      },
+    ],
+  },
+});
 
 const menu = (
   <Menu>
@@ -34,7 +57,13 @@ class KongfuEditor extends React.Component {
     getOssToken(this.props.match.params.kongfu_id).then(res => console.log(res))
   }
 
+  state = {
+    value: initialValue
+  }
   render() {
+    const {value} = this.state;
+    const onChange = ({value}) => this.setState({value});
+
     return (
       <Layout style={{height: '100%'}}>
 
@@ -73,7 +102,12 @@ class KongfuEditor extends React.Component {
               </Menu>
             </Sider>
             <Content>
-              /* editor goes here */
+              <div style={{margin: '20px'}}>
+                <CannerEditor
+                  value={value}
+                  onChange={onChange}
+                />
+              </div>
             </Content>
           </Layout>
         </Content>
