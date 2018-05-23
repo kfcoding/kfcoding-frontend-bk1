@@ -4,7 +4,7 @@ import createHistory from 'history/createBrowserHistory';
 
 // 1. Initialize
 const app = dva({
-  //history: createHistory()
+  history: createHistory()
 });
 
 // 2. Plugins

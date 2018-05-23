@@ -1,6 +1,6 @@
 import request from '../utils/request';
+import API from "../utils/api";
 
-const API = 'http://192.168.1.100:8081';
 
 export function currentUser() {
   return request(API + '/users/current', {

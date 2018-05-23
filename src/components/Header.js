@@ -1,5 +1,6 @@
 import React from 'react';
 import { Layout, Dropdown, Avatar, Icon, Menu } from 'antd';
+import logo from '../assets/logo-min.png';
 
 const { Header } = Layout;
 
@@ -20,7 +21,7 @@ class MyHeader extends React.Component {
     return (
       <Header>
         <span style={{color: '#fff', fontSize: '24px'}}>
-          <a href="/" style={{color: '#fff'}}><Icon type="dribbble-square"/> 功夫编程</a>
+          <a href="/" style={{color: '#fff'}}><img src="//static.cloudwarehub.com/logo-min.png?x-oss-process=style/logo" style={{width: '80px'}}/> 功夫编程</a>
         </span>
         <span style={{float: 'right'}}>
           <Dropdown overlay={menu}>

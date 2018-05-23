@@ -1,0 +1,29 @@
+.menu span {
+  outline: none;
+}
+.dropdown {
+  display: none;
+  float: right;
+}
+.menu:hover .dropdown {
+  display: inline-block;
+}
+.tree {
+  display: block;
+}
+.tree .ant-tree-node-content-wrapper {
+  width: calc(100% - 18px);
+}
+
+:global(.draggable-tree .ant-tree-node-content-wrapper) {
+  width: calc(100% - 18px);
+  line-height: 40px !important;
+  height: 40px !important;
+}
+
+:global(.draggable-tree .ant-tree-switcher) {
+  line-height: 40px !important;
+}
+:global(.ant-tree-node-selected) {
+  background-color: #e6f7ff !important;
+}

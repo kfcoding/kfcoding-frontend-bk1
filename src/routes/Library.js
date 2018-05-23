@@ -56,7 +56,7 @@ class Library extends React.Component {
     const {visible, loading} = this.state;
 
     let kongfus = this.state.kongfus.map((kf) => {
-      let href = '#/editor/' + kf.id;
+      let href = '/editor/' + kf.id;
       return (
         <div>
           <a href={href} >
