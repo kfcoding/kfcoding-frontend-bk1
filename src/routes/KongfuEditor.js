@@ -10,6 +10,7 @@ import { getOssToken } from "../services/kongfu";
 import CannerEditor from 'kf-slate-editor';
 import {Value} from 'slate';
 import styles from './KongfuEditor.css';
+import Kfeditor from 'kfeditor';
 
 const {Header, Content, Footer, Sider} = Layout;
 const {SubMenu} = Menu;
@@ -17,7 +18,7 @@ const TreeNode = Tree.TreeNode;
 
 const Alioss = require('ali-oss');
 
-const initialValue = Value.fromJSON({
+const initialValue = ({
   document: {
     nodes: [
       {
@@ -55,10 +56,18 @@ const menu = (
 
 class KongfuEditor extends React.Component {
 
+  state = {
+    value: initialValue,
+    pages: [],
+    ossclient: null,
+    currentPage: null,
+    currentValue: null
+  };
+
   componentWillMount() {
     getOssToken(this.props.match.params.kongfu_id).then(res => {
       console.log(res)
-      var client = new Alioss({
+      var client = new Alioss.Wrapper({
         region: 'oss-cn-hangzhou',
         accessKeyId: res.data.result.assumeRoleResponse.credentials.accessKeyId,
         accessKeySecret: res.data.result.assumeRoleResponse.credentials.accessKeySecret,
@@ -66,77 +75,84 @@ class KongfuEditor extends React.Component {
         bucket: 'kfcoding'
       });
       console.log(client.signatureUrl('20/logo-min.png'))
+      this.state.ossclient = client;
     })
   }
 
-  state = {
-    value: initialValue,
-    pages: []
-  }
-
   addPage = () => {
-    this.state.pages.push({
+    let page = {
+      id: new Date().getTime(),
       title: '新章节',
-      content: '',
-      children: [{
-        title: 'new',
-        content: '',
-        children:[{
-          title: 'ok',
-          children: []
-        }]
-      }]
-    });
-    this.forceUpdate()
+      content: Value.fromJSON(initialValue),
+    };
+    this.state.pages.push(page);
+
+    let pushdata = {
+      id: page.id,
+      title: page.title,
+      content: page.content.toJSON()
+    };
+
+    let filename = this.props.match.params.kongfu_id + '/' + page.id + '.json';
+
+    this.state.ossclient.put(filename, new Alioss.Buffer(JSON.stringify(pushdata))).then(() => {
+      this.state.currentPage = page;
+      this.state.currentValue = page.content;
+      this.forceUpdate()
+    })
+
   }
 
   renderItem = (item) => {
-    if (item.children.length === 0) {
-      return (
-        <Menu.Item className={styles.menu}>
-          <span contentEditable={true}>{item.title}</span>
-          <span className={styles.dropdown}>
+    return (
+      <Menu.Item className={styles.menu} key={Math.random()}>
+        <span>{item.title}</span>
+        <span className={styles.dropdown}>
           <Dropdown overlay={menu} trigger={['click']}>
             <a href="#">
               <Icon type="ellipsis"/>
             </a>
           </Dropdown>
           </span>
-        </Menu.Item>
-      )
-    } else {
-      let children = item.children.map(child => {
-        return this.renderItem(child);
-      });
-      return (
-        <SubMenu title={item.title}>
-          {children}
-        </SubMenu>
-      );
+      </Menu.Item>
+    )
 
+  }
+
+  onContentChange = ({value}) => {
+    if (value.document == this.state.currentValue.document) {
+      return;
     }
+    let page = this.state.currentPage;
 
+    let filename = this.props.match.params.kongfu_id + '/' + page.id + '.json';
+    let pushdata = {
+      id: page.id,
+      title: page.title,
+      content: value.toJSON()
+    };
+
+    this.state.ossclient.put(filename, new Alioss.Buffer(JSON.stringify(pushdata))).then(() => {
+    })
+    this.setState({currentValue: value});
   }
 
   render() {
     const {value, pages} = this.state;
-    const onChange = ({value}) => this.setState({value});
+    const onChange = ({value}) => this.setState({currentValue: value});
 
     let rpages = pages.map(page => {
       return this.renderItem(page);
-    })
-
-    const loop = data => data.map((item) => {
-      if (item.children && item.children.length) {
-        return <TreeNode key={item.title} title={
-          <div className={styles.menu}>{item.title} <span className={styles.dropdown} style={{float: 'right'}}><Dropdown overlay={menu} trigger={['click']}>
-                      <a className="ant-dropdown-link" href="#">
-                        <Icon type="ellipsis"/>
-                      </a>
-                    </Dropdown></span></div>} style={{width: '100%'}}>{loop(item.children)}</TreeNode>;
-      }
-      return <TreeNode key={item.title} title={item.title} />;
     });
+
+    let editor = this.state.currentPage ? (
+      <CannerEditor
+        value={this.state.currentValue}
+        //value={this.state.value}
+        onChange={this.onContentChange}
+        style={{height: '100%'}}
+      />
+    ) : null;
 
     return (
       <Layout>
@@ -151,26 +167,20 @@ class KongfuEditor extends React.Component {
                      console.log(collapsed, type);
                    }}
             >
-
-              
-              <a style={{paddingLeft: '20px', display: 'block'}} onClick={this.addPage}><Icon type='plus'/> 新增章节</a>
-              <Tree
-                className="draggable-tree"
-                defaultExpandedKeys={this.state.expandedKeys}
-                draggable
-                onDragEnter={this.onDragEnter}
-                onDrop={this.onDrop}
+              <Menu
+                mode="inline"
               >
-                {loop(this.state.pages)}
-              </Tree>
+                {rpages}
+
+              </Menu>
+
+              <a style={{paddingLeft: '20px', display: 'block'}} onClick={this.addPage}><Icon type='plus'/> 新增章节</a>
+
             </Sider>
             <Content>
               <div style={{padding: '20px', height: '100%'}}>
-                <CannerEditor
-                  value={value}
-                  onChange={onChange}
-                  style={{height: '100%'}}
-                />
+                <Kfeditor/>
+                {editor}
               </div>
 
             </Content>
