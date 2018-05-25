@@ -223,3 +223,48 @@
   text-align: center;
   font-weight: 700;
 }
+
+
+.addCover {
+  background-image: url("../assets/add.png");
+  background-repeat: no-repeat;
+  background-position: 0px 20px;
+  background-size: contain;
+}
+
+.addCover h2 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 20px;
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.1);
+}
+
+.addCover h2 span:first-child,
+.addLeft h2 span:first-child {
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 13px;
+  padding-right: 20px;
+}
+
+.addCover h2 span:first-child {
+  display: block;
+}
+
+.addCover h2 span:last-child,
+.left h2 span:last-child {
+  /*font-family: "Big Caslon", "Book Antiqua", "Palatino Linotype", Georgia, serif;*/
+}
+
+.addLeft h2 {
+  color: #fff;
+  font-size: 15px;
+  line-height: 40px;
+  padding-left: 10px;
+  text-align: left;
+}
+

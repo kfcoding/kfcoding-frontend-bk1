@@ -27,7 +27,7 @@ class CreateKongfuModal extends React.Component {
             )}
           </FormItem>
           <FormItem label="功夫描述">
-            {getFieldDecorator('description')(<Input type="textarea"/>)}
+            {getFieldDecorator('brief')(<Input type="textarea"/>)}
           </FormItem>
         </Form>
       </Modal>

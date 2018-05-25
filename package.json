@@ -10,6 +10,7 @@
     "@canner/slate-icon-codeblock": "^1.2.9",
     "ali-oss": "^5.2.0",
     "antd": "^3.5.2",
+    "axios": "^0.18.0",
     "babel-plugin-import": "^1.7.0",
     "dva": "^2.2.3",
     "kf-slate-editor": "^1.0.6",

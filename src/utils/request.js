@@ -25,9 +25,8 @@ export default function request(url, options) {
   if (!options) {
     options = {};
   }
-  options.headers = {
-    Authorization: 'Bearer ' + localStorage.getItem('token')
-  };
+  options.headers.Authorization = 'Bearer ' + localStorage.getItem('token')
+
 
   return fetch(url, options)
     .then(checkStatus)
