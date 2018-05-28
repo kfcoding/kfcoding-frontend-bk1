@@ -4,7 +4,7 @@ import IndexPage from './routes/IndexPage';
 import Library from "./routes/Library";
 import Signin from "./routes/Signin";
 import Callback from "./routes/Callback";
-// import KongfuEditor from "./routes/KongfuEditor";
+import KongfuEditor from "./routes/KongfuEditor";
 
 function RouterConfig({ history }) {
   return (
@@ -14,7 +14,7 @@ function RouterConfig({ history }) {
         <Route path="/library" exact component={Library}/>
         <Route path='/signin' exact component={Signin}/>
         <Route path='/callback' component={Callback}/>
-        {/*<Route path='/editor/:kongfu_id' component={KongfuEditor}/>*/}
+        <Route path='/editor/:kongfu_id' component={KongfuEditor}/>
       </Switch>
     </Router>
   );

@@ -7,10 +7,9 @@ import { current, currentUser } from "../services/users";
 import MyFooter from "../components/Footer";
 import request from "../utils/request";
 import { getOssToken } from "../services/kongfu";
-import CannerEditor from 'kf-slate-editor';
+import CannerEditor from 'canner-slate-editor';
 import {Value} from 'slate';
 import styles from './KongfuEditor.css';
-import Kfeditor from 'kfeditor';
 
 const {Header, Content, Footer, Sider} = Layout;
 const {SubMenu} = Menu;
@@ -27,11 +26,9 @@ const initialValue = ({
         nodes: [
           {
             object: 'text',
-            leaves: [
-              {
-                text: '开始编写功夫秘籍！',
-              }
-            ],
+            leaves: [{
+              text: '请开始你的表演！'
+            }],
           },
         ],
       },
@@ -95,11 +92,11 @@ class KongfuEditor extends React.Component {
 
     let filename = this.props.match.params.kongfu_id + '/' + page.id + '.json';
 
-    this.state.ossclient.put(filename, new Alioss.Buffer(JSON.stringify(pushdata))).then(() => {
+    //this.state.ossclient.put(filename, new Alioss.Buffer(JSON.stringify(pushdata))).then(() => {
       this.state.currentPage = page;
-      this.state.currentValue = page.content;
+      this.state.currentValue = Value.fromJSON(page.content);
       this.forceUpdate()
-    })
+    //})
 
   }
 
@@ -116,12 +113,11 @@ class KongfuEditor extends React.Component {
           </span>
       </Menu.Item>
     )
-
   }
 
   onContentChange = ({value}) => {
     if (value.document == this.state.currentValue.document) {
-      return;
+      //return;
     }
     let page = this.state.currentPage;
 
@@ -132,8 +128,9 @@ class KongfuEditor extends React.Component {
       content: value.toJSON()
     };
 
-    this.state.ossclient.put(filename, new Alioss.Buffer(JSON.stringify(pushdata))).then(() => {
-    })
+    //this.state.ossclient.put(filename, new Alioss.Buffer(JSON.stringify(pushdata))).then(() => {
+    //})
+
     this.setState({currentValue: value});
   }
 
@@ -151,6 +148,7 @@ class KongfuEditor extends React.Component {
         //value={this.state.value}
         onChange={this.onContentChange}
         style={{height: '100%'}}
+        placeholder='请开始你的表演！'
       />
     ) : null;
 
@@ -179,7 +177,7 @@ class KongfuEditor extends React.Component {
             </Sider>
             <Content>
               <div style={{padding: '20px', height: '100%'}}>
-                <Kfeditor/>
+                {/*<Kfeditor/>*/}
                 {editor}
               </div>
 
