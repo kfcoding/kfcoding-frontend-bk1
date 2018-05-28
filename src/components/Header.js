@@ -7,12 +7,12 @@ const { Header } = Layout;
 
 const menu = (
   <Menu style={{marginTop: '10px'}}>
+    {/*<Menu.Item>*/}
+      {/*<a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/"><Icon type="user"/> 个人信息</a>*/}
+    {/*</Menu.Item>*/}
+    {/*<Menu.Divider/>*/}
     <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/"><Icon type="user"/> 个人信息</a>
-    </Menu.Item>
-    <Menu.Divider/>
-    <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/"><Icon type="poweroff"/> 退出</a>
+      <a target="_blank" rel="noopener noreferrer" href="//"><Icon type="poweroff"/> 退出</a>
     </Menu.Item>
   </Menu>
 );
@@ -22,7 +22,7 @@ class MyHeader extends React.Component {
     return (
       <Header>
         <span style={{color: '#fff', fontSize: '24px'}}>
-          <a href="/" style={{color: '#fff'}}><img src="//static.cloudwarehub.com/logo-min.png?x-oss-process=style/logo" style={{width: '80px'}}/> 功夫编程</a>
+          <a href="/library" style={{color: '#fff'}}><img src="//static.cloudwarehub.com/logo-min.png?x-oss-process=style/logo" style={{width: '80px'}}/> 功夫编程</a>
         </span>
         <span style={{float: 'right'}}>
           <Dropdown overlay={menu}>

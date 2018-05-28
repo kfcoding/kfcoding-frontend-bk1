@@ -7,7 +7,7 @@ import { current, currentUser } from "../services/users";
 import MyFooter from "../components/Footer";
 import request from "../utils/request";
 import { getOssToken } from "../services/kongfu";
-import CannerEditor from 'canner-slate-editor';
+import CannerEditor from 'kf-slate-editor';
 import { Value } from 'slate';
 import styles from './KongfuEditor.css';
 
@@ -169,6 +169,7 @@ class KongfuEditor extends React.Component {
           for (var i in meta.pages) {
             if (meta.pages[i] === page) {
               meta.pages.splice(i, 1);
+              this.state.ossclient.delete(this.state.kongfu_id + '/' + page.file);
               this.state.ossclient.put(this.state.kongfu_id + '/meta.json', new Alioss.Buffer(JSON.stringify(this.state.meta))).then(() => {
                 this.setState({currentPage: null})
               });

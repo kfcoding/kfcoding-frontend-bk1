@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import styles from './Library.css';
-import { Layout, Menu, Row, Col, Card, Icon, Avatar, Divider, Dropdown, Modal, Button, Form, Input } from 'antd';
+import { Layout, Menu, Row, Col, Card, Icon, Avatar, Divider, Dropdown, Modal, Button } from 'antd';
 import CreateKongfuModal from "../components/CreateKongfuModal";
 import MyHeader from "../components/Header";
 import request from "../utils/request";
@@ -10,9 +10,8 @@ import { getMyKongfu } from "../services/users";
 import MyFooter from "../components/Footer";
 import { createKongfu} from "../services/kongfu";
 
-const {Content, Footer} = Layout;
-const {Meta} = Card;
-
+const {Content} = Layout;
+const ButtonGroup = Button.Group;
 
 class Library extends React.Component {
   state = {
@@ -64,16 +63,24 @@ class Library extends React.Component {
     const {visible, loading} = this.state;
 
     let kongfus = this.state.kongfus.map((kf) => {
-      let href = '/editor/' + kf.id;
+      let viewhref = '/reader/' + kf.id;
+      let edithref = '/editor/' + kf.id;
       return (
-        <div>
-          <a href={href} >
+        <div style={{float: 'left', marginRight: '40px'}}>
+          <a href='#' style={{display: 'block', width: '240px', height: '320px'}}>
             <Book key={kf.id} book={kf}/>
           </a>
+          <div style={{paddingTop: '30px', textAlign: 'center'}}>
+            <ButtonGroup>
+              <Button type="primary" icon="eye" href={viewhref}>浏览</Button>
+              <Button type="primary" icon="edit" href={edithref}>编辑</Button>
+            </ButtonGroup>
+          </div>
         </div>
       )
     })
 
+    let username = JSON.parse(localStorage.getItem('user')).name;
     return (
       <Layout className="layout" style={{height: '100%'}}>
         <MyHeader/>
@@ -85,14 +92,15 @@ class Library extends React.Component {
               <div className={styles.container} >
                 <div className={styles.book}>
                   <div className={styles.front}>
-                    <div className={styles.addCover}>
+                    <div className={styles.addCover} style={{backgroundColor: '#525485'}}>
                       <h2>
+                        <span>{username}</span>
                         <span>添加秘籍</span>
                       </h2>
                     </div>
                   </div>
 
-                  <div className={styles['left']}>
+                  <div className={styles['left']} style={{backgroundColor: '#525485'}}>
                     <h2>
                       <span>作者</span>
                       <span>名称</span>
@@ -113,8 +121,6 @@ class Library extends React.Component {
       </Layout>
     );
   }
-
-
 }
 
 Library.propTypes = {};

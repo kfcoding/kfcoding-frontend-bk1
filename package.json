@@ -12,7 +12,6 @@
     "axios": "^0.18.0",
     "babel-plugin-import": "^1.7.0",
     "dva": "^2.2.3",
-    "kf-slate-editor": "^1.0.6",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "slate": "^0.33.6",
@@ -29,6 +28,7 @@
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.1.0",
     "husky": "^0.12.0",
+    "kf-slate-editor": "^1.0.8",
     "redbox-react": "^1.4.3",
     "roadhog": "^2.0.0"
   }

@@ -6,7 +6,7 @@ const { Footer } = Layout;
 class MyFooter extends React.Component {
   render() {
     return (
-      <Footer style={{background: '#fff'}}>
+      <Footer style={{background: '#f3f3f3'}}>
         功夫编程 KFCoding.com 2018
       </Footer>
     )
