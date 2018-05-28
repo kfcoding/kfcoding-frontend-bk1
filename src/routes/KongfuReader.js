@@ -22,9 +22,6 @@ class KongfuReader extends React.Component {
       meta: null,
       prefix: 'http://oss.book.kfcoding.com/' + this.props.match.params.kongfu_id
     };
-  }
-
-  componentWillMount() {
     let kongfu_id = this.state.kongfu_id;
     var client = new Alioss.Wrapper({
       region: 'oss-cn-hangzhou',
@@ -37,8 +34,12 @@ class KongfuReader extends React.Component {
 
     request(this.state.prefix + '/meta.json').then(res => {
 
-        this.setState({meta: res.data});
+      this.setState({meta: res.data});
     })
+  }
+
+  componentWillMount() {
+
   }
 
   openPage = ({key}) => {
@@ -54,6 +55,10 @@ class KongfuReader extends React.Component {
       this.state.currentPage = page;
       this.setState({currentValue: Value.fromJSON(res.data)});
     })
+  }
+
+  onChange = () => {
+
   }
 
   render() {
@@ -73,6 +78,7 @@ class KongfuReader extends React.Component {
       <CannerEditor
         value={this.state.currentValue}
         style={{height: '100%'}}
+        onChange={this.onChange}
         readOnly={true}
       />
     ) : null;
