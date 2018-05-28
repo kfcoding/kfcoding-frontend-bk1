@@ -23,7 +23,9 @@ function checkStatus(response) {
  */
 export default function request(url, options) {
   if (!options) {
-    options = {};
+    options = {
+      headers: {}
+    };
   }
   options.headers.Authorization = 'Bearer ' + localStorage.getItem('token')
 

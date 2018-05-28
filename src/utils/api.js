@@ -1,3 +1,3 @@
-var API = 'http://localhost:8081';
+var API = 'http://api.kfcoding.com';
 
 export default API;
