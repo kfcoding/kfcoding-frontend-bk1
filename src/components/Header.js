@@ -1,5 +1,6 @@
 import React from 'react';
 import { Layout, Dropdown, Avatar, Icon, Menu } from 'antd';
+import { getUser} from "../services/users";
 import logo from '../assets/logo-min.png';
 
 const { Header } = Layout;
@@ -26,8 +27,8 @@ class MyHeader extends React.Component {
         <span style={{float: 'right'}}>
           <Dropdown overlay={menu}>
             <a className="ant-dropdown-link" href="#">
-              <Avatar icon="user"/>
-              <span style={{color: '#fff', padding: '0 15px'}}>guodong</span>
+              <Avatar src={ getUser().avatarUrl}></Avatar>
+              <span style={{color: '#fff', padding: '0 15px'}}>{ getUser().name }</span>
               <Icon type="down" style={{color: '#fff'}}/>
             </a>
           </Dropdown>
