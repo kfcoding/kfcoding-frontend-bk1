@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "start": "roadhog server",
-    "build": "roadhog build",
+    "build": "NO_COMPRESS=1 roadhog build --debug",
     "lint": "eslint --ext .js src test",
     "precommit": "npm run lint"
   },
@@ -30,6 +30,6 @@
     "husky": "^0.12.0",
     "kf-slate-editor": "^1.0.9",
     "redbox-react": "^1.4.3",
-    "roadhog": "^2.0.0"
+    "roadhog": "^2.4.2"
   }
 }
