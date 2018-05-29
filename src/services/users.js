@@ -15,6 +15,9 @@ export function getToken(code) {
 }
 
 export function getUser() {
+  if (!localStorage.getItem('user')) {
+    return {avatarUrl: null};
+  }
   return JSON.parse(localStorage.getItem('user'))
 }
 

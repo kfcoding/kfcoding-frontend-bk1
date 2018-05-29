@@ -1,6 +1,13 @@
 .menu span {
   outline: none;
 }
+.menu:hover {
+  color: #1890ff;
+}
+.menu.active {
+  background: #e6f7ff;
+  color: #1890ff;
+}
 .dropdown {
   display: none;
   float: right;

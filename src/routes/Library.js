@@ -66,13 +66,13 @@ class Library extends React.Component {
       let viewhref = '/reader/' + kf.id;
       let edithref = '/editor/' + kf.id;
       return (
-        <div style={{float: 'left', marginRight: '40px'}}>
+        <div style={{float: 'left', marginRight: '40px', marginBottom: '40px'}}>
           <a href='#' style={{display: 'block', width: '240px', height: '320px'}}>
             <Book key={kf.id} book={kf}/>
           </a>
           <div style={{paddingTop: '30px', textAlign: 'center'}}>
             <ButtonGroup>
-              <Button type="primary" icon="eye" href={viewhref}>浏览</Button>
+              <Button type="primary" icon="eye" href={viewhref}>阅读</Button>
               <Button type="primary" icon="edit" href={edithref}>编辑</Button>
             </ButtonGroup>
           </div>

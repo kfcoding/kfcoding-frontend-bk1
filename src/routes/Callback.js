@@ -17,7 +17,7 @@ class Callback extends React.Component {
   constructor() {
     super();
     getToken(getParameterByName('code')).then(msg => {
-      alert(JSON.stringify(msg))
+      //alert(JSON.stringify(msg))
       if (msg.data.code != 200) {
         alert(msg.data.message);
         return;
