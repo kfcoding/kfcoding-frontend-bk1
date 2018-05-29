@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "start": "roadhog server",
-    "build": "NO_COMPRESS=1 roadhog build --debug",
+    "build": "COMPRESS=none roadhog build",
     "lint": "eslint --ext .js src test",
     "precommit": "npm run lint"
   },
